@@ -1,6 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <header>Monster Slayer</header>
+  <div>
+    <section>
+      <h2>Monster Health</h2>
+      <div>
+        <div></div>
+      </div>
+    </section>
+    <section>
+      <h2>Your Health</h2>
+      <div>
+        <div></div>
+      </div>
+    </section>
+    <section>
+      <button>ATTACK</button>
+      <button>SPECIAL ATTACK</button>
+      <button>HEAL</button>
+      <button>SURRENDER</button>
+    </section>
+    <section>
+      <h2>Battle log</h2>
+      <ul></ul>
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
