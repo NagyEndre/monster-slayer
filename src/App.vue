@@ -1,5 +1,7 @@
 <template>
-  <header>Monster Slayer</header>
+  <header>
+    <h1>Monster Slayer</h1>
+  </header>
   <div>
     <section>
       <h2>Monster Health</h2>
@@ -39,12 +41,24 @@ export default class App extends Vue {}
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Jost", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  background-color: #880017;
+  color: white;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.26);
+  padding: 0.5rem;
+  margin-bottom: 2rem;
 }
 </style>
