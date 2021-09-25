@@ -5,14 +5,14 @@
   <div>
     <section>
       <h2>Monster Health</h2>
-      <div>
-        <div></div>
+      <div class="healthbar">
+        <div class="healthbar-value"></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
-      <div>
-        <div></div>
+      <div class="healthbar">
+        <div class="healthbar-value"></div>
       </div>
     </section>
     <section>
@@ -30,11 +30,9 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
 
 @Options({
   components: {
-    HelloWorld,
   },
 })
 export default class App extends Vue {}
@@ -63,7 +61,6 @@ header {
 }
 section {
   widows: 90%;
-  background-color: skyblue;
   max-width: 40rem;
 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -80,4 +77,17 @@ button {
   margin: 1rem;
   cursor: pointer
 }
+
+.healthbar {
+  width: 100%;
+  height: 40px;
+  background: honeydew;
+  border: 1px solid grey
+}
+.healthbar-value{
+  background-color: green;
+  width: 80%;
+  height: 100%;
+}
+
 </style>
