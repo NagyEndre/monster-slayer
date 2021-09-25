@@ -61,4 +61,23 @@ header {
   padding: 0.5rem;
   margin-bottom: 2rem;
 }
+section {
+  widows: 90%;
+  background-color: skyblue;
+  max-width: 40rem;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 1rem auto;
+  border-radius: 14px;
+  padding: 0.5rem;
+  text-align: center;
+}
+button {
+  font-size: inherit;
+  background-color: #880017;
+  color: white;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  cursor: pointer
+}
 </style>
