@@ -1,4 +1,5 @@
 # monster-slayer
+Fight against the monster!
 
 ## Project setup
 ```
