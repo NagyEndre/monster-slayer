@@ -40,9 +40,16 @@ export default class App extends Vue {
   playerHealth = 100
 
   attackMonster(): void{
-    let attackValue = Math.floor(Math.random() * 5) + 5
+    let attackValue = this.getRandomNumber(5, 10)
     this.monsterHealth -= attackValue
-    console.log(this.monsterHealth)
+    this.attackPlayer()
+  }
+  attackPlayer(): void{
+    let attackValue = this.getRandomNumber(2,12)
+    this.playerHealth -= attackValue
+  }
+  private getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max-min)) + min
   }
 }
 </script>
