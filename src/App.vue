@@ -15,7 +15,7 @@
         <div class="healthbar-value"></div>
       </div>
     </section>
-    <section>
+    <section id="controlls">
       <button>ATTACK</button>
       <button>SPECIAL ATTACK</button>
       <button>HEAL</button>
@@ -70,12 +70,14 @@ section {
   text-align: center;
 }
 button {
-  font-size: inherit;
+  font: inherit;
   background-color: #880017;
   color: white;
   padding: 1rem 2rem;
+  border-radius: 1rem;
   margin: 1rem;
-  cursor: pointer
+  cursor: pointer;
+  width: 14rem;
 }
 
 .healthbar {
@@ -89,5 +91,11 @@ button {
   width: 80%;
   height: 100%;
 }
-
+#controlls{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
 </style>
