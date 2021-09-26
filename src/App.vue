@@ -79,6 +79,10 @@ button {
   cursor: pointer;
   width: 14rem;
 }
+button:hover {
+  background-color: #CC0010;
+  transform: scale(1.1)
+}
 
 .healthbar {
   width: 100%;
