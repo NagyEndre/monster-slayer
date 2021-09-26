@@ -12,7 +12,7 @@
     <section>
       <h2>Your Health</h2>
       <div class="healthbar">
-        <div class="healthbar-value"></div>
+        <div class="healthbar-value" :style="{width: playerHealth + '%'}"></div>
       </div>
     </section>
     <section id="controlls">
@@ -37,8 +37,9 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class App extends Vue {
   monsterHealth = 100
+  playerHealth = 100
 
-  attackMonster(){
+  attackMonster(): void{
     let attackValue = Math.floor(Math.random() * 5) + 5
     this.monsterHealth -= attackValue
     console.log(this.monsterHealth)
@@ -93,7 +94,6 @@ button:hover {
 }
 
 .healthbar {
-  width: 100%;
   height: 40px;
   background: honeydew;
   border: 1px solid grey
