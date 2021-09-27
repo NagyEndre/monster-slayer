@@ -6,13 +6,19 @@
     <section>
       <h2>Monster Health</h2>
       <div class="healthbar">
-        <div class="healthbar-value" :style="{width: monsterHealth +'%'}"></div>
+        <div
+          class="healthbar-value"
+          :style="{ width: monsterHealth + '%' }"
+        ></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
       <div class="healthbar">
-        <div class="healthbar-value"></div>
+        <div
+          class="healthbar-value"
+          :style="{ width: playerHealth + '%' }"
+        ></div>
       </div>
     </section>
     <section id="controlls">
@@ -32,16 +38,23 @@
 import { Options, Vue } from "vue-class-component";
 
 @Options({
-  components: {
-  },
+  components: {},
 })
 export default class App extends Vue {
-  monsterHealth = 100
+  monsterHealth = 100;
+  playerHealth = 100;
 
-  attackMonster(){
-    let attackValue = Math.floor(Math.random() * 5) + 5
-    this.monsterHealth -= attackValue
-    console.log(this.monsterHealth)
+  attackMonster(): void {
+    const attackValue = this.getRandomNumber(5, 10);
+    this.monsterHealth -= attackValue;
+    this.attackPlayer();
+  }
+  attackPlayer(): void {
+    const attackValue = this.getRandomNumber(2, 12);
+    this.playerHealth -= attackValue;
+  }
+  private getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }
 </script>
@@ -88,22 +101,22 @@ button {
   width: 14rem;
 }
 button:hover {
-  background-color: #CC0010;
-  transform: scale(1.1)
+  background-color: #cc0010;
+  transform: scale(1.1);
 }
 
 .healthbar {
   width: 100%;
   height: 40px;
   background: honeydew;
-  border: 1px solid grey
+  border: 1px solid grey;
 }
-.healthbar-value{
+.healthbar-value {
   background-color: green;
   width: 80%;
   height: 100%;
 }
-#controlls{
+#controlls {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
