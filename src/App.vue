@@ -6,13 +6,13 @@
     <section>
       <h2>Monster Health</h2>
       <div class="healthbar">
-        <div class="healthbar-value" :style="{width: monsterHealth +'%'}"></div>
+        <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
       <div class="healthbar">
-        <div class="healthbar-value" :style="{width: playerHealth + '%'}"></div>
+        <div class="healthbar-value" :style="playerHealthBarStyles"></div>
       </div>
     </section>
     <section id="controlls">
@@ -29,27 +29,36 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component'
 
 @Options({
-  components: {
-  },
+  components: {},
 })
 export default class App extends Vue {
-  monsterHealth = 100
-  playerHealth = 100
+  private readonly MAX_HEALTH = 100
 
-  attackMonster(): void{
-    let attackValue = this.getRandomNumber(5, 10)
+  monsterHealth = this.MAX_HEALTH
+  playerHealth = this.MAX_HEALTH
+
+  get monsterHealthBarStyles() {
+    return { width: `${this.monsterHealth}%` }
+  }
+
+  get playerHealthBarStyles() {
+    return { width: `${this.playerHealth}%` }
+  }
+
+  attackMonster(): void {
+    const attackValue = this.getRandomNumber(5, 10)
     this.monsterHealth -= attackValue
     this.attackPlayer()
   }
-  attackPlayer(): void{
-    let attackValue = this.getRandomNumber(2,12)
+  attackPlayer(): void {
+    const attackValue = this.getRandomNumber(2, 12)
     this.playerHealth -= attackValue
   }
   private getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max-min)) + min
+    return Math.floor(Math.random() * (max - min)) + min
   }
 }
 </script>
@@ -60,7 +69,7 @@ export default class App extends Vue {
 }
 
 html {
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 
 body {
@@ -96,21 +105,21 @@ button {
   width: 14rem;
 }
 button:hover {
-  background-color: #CC0010;
-  transform: scale(1.1)
+  background-color: #cc0010;
+  transform: scale(1.1);
 }
 
 .healthbar {
   height: 40px;
   background: honeydew;
-  border: 1px solid grey
+  border: 1px solid grey;
 }
-.healthbar-value{
+.healthbar-value {
   background-color: green;
   width: 80%;
   height: 100%;
 }
-#controlls{
+#controlls {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
