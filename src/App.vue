@@ -8,7 +8,7 @@
       <div class="healthbar">
         <div
           class="healthbar-value"
-          :style="{ width: monsterHealth + '%' }"
+          :style="{ width: monsterHealthInPercentage }"
         ></div>
       </div>
     </section>
@@ -17,7 +17,7 @@
       <div class="healthbar">
         <div
           class="healthbar-value"
-          :style="{ width: playerHealth + '%' }"
+          :style="{ width: playerHealthInPercentage }"
         ></div>
       </div>
     </section>
@@ -35,26 +35,34 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Options, Vue } from 'vue-class-component'
 
 @Options({
   components: {},
 })
 export default class App extends Vue {
-  monsterHealth = 100;
-  playerHealth = 100;
+  monsterHealth = 100
+  playerHealth = 100
+
+  get monsterHealthInPercentage(): string {
+    return `${this.monsterHealth}%`
+  }
+
+  get playerHealthInPercentage(): string {
+    return `${this.playerHealth}%`
+  }
 
   attackMonster(): void {
-    const attackValue = this.getRandomNumber(5, 10);
-    this.monsterHealth -= attackValue;
-    this.attackPlayer();
+    const attackValue = this.getRandomNumber(5, 10)
+    this.monsterHealth -= attackValue
+    this.attackPlayer()
   }
   attackPlayer(): void {
-    const attackValue = this.getRandomNumber(2, 12);
-    this.playerHealth -= attackValue;
+    const attackValue = this.getRandomNumber(2, 12)
+    this.playerHealth -= attackValue
   }
   private getRandomNumber(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min
   }
 }
 </script>
@@ -65,7 +73,7 @@ export default class App extends Vue {
 }
 
 html {
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 
 body {
