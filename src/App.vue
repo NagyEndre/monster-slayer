@@ -6,19 +6,13 @@
     <section>
       <h2>Monster Health</h2>
       <div class="healthbar">
-        <div
-          class="healthbar-value"
-          :style="{ width: monsterHealthInPercentage }"
-        ></div>
+        <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
       <div class="healthbar">
-        <div
-          class="healthbar-value"
-          :style="{ width: playerHealthInPercentage }"
-        ></div>
+        <div class="healthbar-value" :style="playerHealthBarStyles"></div>
       </div>
     </section>
     <section id="controlls">
@@ -46,12 +40,12 @@ export default class App extends Vue {
   monsterHealth = this.MAX_HEALTH
   playerHealth = this.MAX_HEALTH
 
-  get monsterHealthInPercentage(): string {
-    return `${this.monsterHealth}%`
+  get monsterHealthBarStyles() {
+    return { width: `${this.monsterHealth}%` }
   }
 
-  get playerHealthInPercentage(): string {
-    return `${this.playerHealth}%`
+  get playerHealthBarStyles() {
+    return { width: `${this.playerHealth}%` }
   }
 
   attackMonster(): void {
