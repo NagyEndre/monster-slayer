@@ -126,4 +126,8 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+button:disabled{
+  background: grey;
+  transform: none;
+}
 </style>
