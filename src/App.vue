@@ -41,8 +41,10 @@ import { Options, Vue } from 'vue-class-component'
   components: {},
 })
 export default class App extends Vue {
-  monsterHealth = 100
-  playerHealth = 100
+  private readonly MAX_HEALTH = 100
+
+  monsterHealth = this.MAX_HEALTH
+  playerHealth = this.MAX_HEALTH
 
   get monsterHealthInPercentage(): string {
     return `${this.monsterHealth}%`
