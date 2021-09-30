@@ -4,7 +4,7 @@
   </header>
   <div>
     <section>
-      <h2>Monster Health</h2>
+      <h2>Monster's Health</h2>
       <img src="https://robohash.org/monster.png?set=set2" />
       <div class="healthbar">
         <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
