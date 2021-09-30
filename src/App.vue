@@ -151,5 +151,6 @@ button:hover {
 button:disabled {
   background: grey;
   transform: none;
+  cursor: not-allowed;
 }
 </style>
