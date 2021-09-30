@@ -5,14 +5,14 @@
   <div>
     <section>
       <h2>Monster's Health</h2>
-      <img src="https://robohash.org/monster.png?set=set2" />
+      <img :src="monsterAvatar" />
       <div class="healthbar">
         <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
-      <img src="https://robohash.org/human.png?set=set5" />
+      <img :src="playerAvatar" />
       <div class="healthbar">
         <div class="healthbar-value" :style="playerHealthBarStyles"></div>
       </div>
@@ -40,6 +40,9 @@ import { Options, Vue } from 'vue-class-component'
 })
 export default class App extends Vue {
   private readonly MAX_HEALTH = 100
+
+  monsterAvatar = `https://robohash.org/${Math.random()}.png?set=set2`
+  playerAvatar = `https://robohash.org/${Math.random()}.png`
 
   monsterHealth = this.MAX_HEALTH
   playerHealth = this.MAX_HEALTH
