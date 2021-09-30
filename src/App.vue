@@ -17,7 +17,7 @@
     </section>
     <section id="controlls">
       <button @click="attackMonster">ATTACK</button>
-      <button @click="specialAttack" :disabled="!mayUseSpecialAttack">
+      <button @click="specialAttack" :disabled="attackNotAvailable">
         SPECIAL ATTACK
       </button>
       <button>HEAL</button>
@@ -43,7 +43,7 @@ export default class App extends Vue {
   playerHealth = this.MAX_HEALTH
 
   private roundCount = 0
-  private isSpecialAttackUsed = false
+  private isAttackUsed = false
 
   get monsterHealthBarStyles() {
     return { width: `${this.monsterHealth}%` }
@@ -53,12 +53,11 @@ export default class App extends Vue {
     return { width: `${this.playerHealth}%` }
   }
 
-  get mayUseSpecialAttack(): boolean {
-    const isNewRound: boolean = this.roundCount % 3 === 0
-    if (isNewRound) {
-      this.isSpecialAttackUsed = false // reset special attack
+  get attackNotAvailable() {
+    if (this.roundCount % 3 === 0) {
+      this.isAttackUsed = false
     }
-    return !this.isSpecialAttackUsed
+    return this.isAttackUsed
   }
 
   attackMonster(): void {
@@ -67,6 +66,7 @@ export default class App extends Vue {
     this.monsterHealth -= attackValue
     this.attackPlayer()
   }
+
   attackPlayer(): void {
     const attackValue = this.getRandomNumber(2, 12)
     this.playerHealth -= attackValue
@@ -76,7 +76,7 @@ export default class App extends Vue {
     this.roundCount++
     const attackValue = this.getRandomNumber(10, 20)
     this.monsterHealth -= attackValue
-    this.isSpecialAttackUsed = true // use spacial attack
+    this.isAttackUsed = true
     this.attackPlayer()
   }
   private getRandomNumber(min: number, max: number): number {
@@ -132,7 +132,6 @@ button:hover {
 }
 
 .healthbar {
-  width: 100%;
   height: 40px;
   background: honeydew;
   border: 1px solid grey;
@@ -150,6 +149,7 @@ button:hover {
   justify-content: center;
 }
 button:disabled {
-  background-color: gray;
+  background: grey;
+  transform: none;
 }
 </style>
