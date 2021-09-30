@@ -175,6 +175,9 @@ button:disabled {
   transform: none;
   cursor: not-allowed;
 }
+h2 {
+  margin-bottom: 0.25rem;
+}
 img {
   width: 25%;
 }
