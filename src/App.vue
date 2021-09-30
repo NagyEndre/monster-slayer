@@ -5,12 +5,14 @@
   <div>
     <section>
       <h2>Monster Health</h2>
+      <img src="https://robohash.org/monster.png?set=set2" />
       <div class="healthbar">
         <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
       </div>
     </section>
     <section>
       <h2>Your Health</h2>
+      <img src="https://robohash.org/human.png?set=set5" />
       <div class="healthbar">
         <div class="healthbar-value" :style="playerHealthBarStyles"></div>
       </div>
@@ -169,5 +171,8 @@ button:disabled {
   background: grey;
   transform: none;
   cursor: not-allowed;
+}
+img {
+  width: 25%;
 }
 </style>
