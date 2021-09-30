@@ -67,13 +67,15 @@ export default class App extends Vue {
   attackMonster(): void {
     this.roundCount++
     const attackValue = this.getRandomNumber(5, 10)
-    this.monsterHealth -= attackValue
+    const calculatedHealth = (this.monsterHealth -= attackValue)
+    this.monsterHealth = calculatedHealth < 0 ? 0 : calculatedHealth
     this.attackPlayer()
   }
 
   attackPlayer(): void {
     const attackValue = this.getRandomNumber(2, 12)
-    this.playerHealth -= attackValue
+    const calculatedHealth = (this.playerHealth -= attackValue)
+    this.playerHealth = calculatedHealth < 0 ? 0 : calculatedHealth
   }
 
   specialAttack() {
