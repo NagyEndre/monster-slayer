@@ -41,14 +41,19 @@ import { Options, Vue } from 'vue-class-component'
 export default class App extends Vue {
   private readonly MAX_HEALTH = 100
 
-  monsterAvatar = `https://robohash.org/${Math.random()}.png?set=set2`
-  playerAvatar = `https://robohash.org/${Math.random()}.png`
-
   monsterHealth = this.MAX_HEALTH
   playerHealth = this.MAX_HEALTH
 
   private roundCount = 0
   private isAttackUsed = false
+
+  get monsterAvatar() {
+    return `https://robohash.org/${Math.random()}.png?set=set2`
+  }
+
+  get playerAvatar() {
+    return `https://robohash.org/${Math.random()}.png`
+  }
 
   get monsterHealthBarStyles() {
     return { width: `${this.monsterHealth}%` }
