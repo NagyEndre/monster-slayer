@@ -20,7 +20,7 @@
       <button @click="specialAttack" :disabled="attackNotAvailable">
         SPECIAL ATTACK
       </button>
-      <button>HEAL</button>
+      <button @click="healPlayer" :disabled="canNotHeal">HEAL</button>
       <button>SURRENDER</button>
     </section>
     <section>
@@ -60,6 +60,10 @@ export default class App extends Vue {
     return this.isAttackUsed
   }
 
+  get canNotHeal() {
+    return this.playerHealth === this.MAX_HEALTH
+  }
+
   attackMonster(): void {
     this.roundCount++
     const attackValue = this.getRandomNumber(5, 10)
@@ -77,6 +81,17 @@ export default class App extends Vue {
     const attackValue = this.getRandomNumber(10, 20)
     this.monsterHealth -= attackValue
     this.isAttackUsed = true
+    this.attackPlayer()
+  }
+
+  healPlayer() {
+    this.roundCount++
+    const healValue: number = this.getRandomNumber(5, 15)
+    const calculatedHealth: number = (this.playerHealth += healValue)
+
+    this.playerHealth =
+      calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
+
     this.attackPlayer()
   }
   private getRandomNumber(min: number, max: number): number {
