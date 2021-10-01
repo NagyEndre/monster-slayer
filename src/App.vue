@@ -3,29 +3,15 @@
     <h1>Monster Slayer</h1>
   </header>
   <div>
-    <section>
-      <h2>Monster's Health</h2>
-      <img :src="monsterAvatar" />
-      <div class="healthbar">
-        <div class="healthbar-value" :style="monsterHealthBarStyles"></div>
-      </div>
-    </section>
-    <section>
-      <h2>Your Health</h2>
-      <img :src="playerAvatar" />
-      <div class="healthbar">
-        <div class="healthbar-value" :style="playerHealthBarStyles"></div>
-      </div>
-    </section>
-    <section id="controlls">
+    <PlayerCard name="Monster's" :health="monsterHealth" avatarType="2" class="container" />
+    <PlayerCard name="Your" :health="playerHealth" avatarType="1" class="container" />
+    <section id="controlls" class="container">
       <button @click="attackMonster">ATTACK</button>
-      <button @click="specialAttack" :disabled="attackNotAvailable">
-        SPECIAL ATTACK
-      </button>
+      <button @click="specialAttack" :disabled="attackNotAvailable">SPECIAL ATTACK</button>
       <button @click="healPlayer" :disabled="canNotHeal">HEAL</button>
       <button>SURRENDER</button>
     </section>
-    <section>
+    <section class="container">
       <h2>Battle log</h2>
       <ul></ul>
     </section>
@@ -34,9 +20,10 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import PlayerCard from './components/PlayerCard.vue'
 
 @Options({
-  components: {},
+  components: { PlayerCard },
 })
 export default class App extends Vue {
   private readonly MAX_HEALTH = 100
@@ -46,22 +33,6 @@ export default class App extends Vue {
 
   private roundCount = 0
   private isAttackUsed = false
-
-  get monsterAvatar() {
-    return `https://robohash.org/${Math.random()}.png?set=set2`
-  }
-
-  get playerAvatar() {
-    return `https://robohash.org/${Math.random()}.png`
-  }
-
-  get monsterHealthBarStyles() {
-    return { width: `${this.monsterHealth}%` }
-  }
-
-  get playerHealthBarStyles() {
-    return { width: `${this.playerHealth}%` }
-  }
 
   get attackNotAvailable() {
     if (this.roundCount % 3 === 0) {
@@ -101,8 +72,7 @@ export default class App extends Vue {
     const healValue: number = this.getRandomNumber(5, 15)
     const calculatedHealth: number = (this.playerHealth += healValue)
 
-    this.playerHealth =
-      calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
+    this.playerHealth = calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
 
     this.attackPlayer()
   }
@@ -116,15 +86,12 @@ export default class App extends Vue {
 * {
   box-sizing: border-box;
 }
-
 html {
   font-family: 'Jost', sans-serif;
 }
-
 body {
   margin: 0;
 }
-
 header {
   background-color: #880017;
   color: white;
@@ -132,16 +99,6 @@ header {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.26);
   padding: 0.5rem;
   margin-bottom: 2rem;
-}
-section {
-  widows: 90%;
-  max-width: 40rem;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 1rem auto;
-  border-radius: 14px;
-  padding: 0.5rem;
-  text-align: center;
 }
 button {
   font: inherit;
@@ -157,16 +114,14 @@ button:hover {
   background-color: #cc0010;
   transform: scale(1.1);
 }
-
-.healthbar {
-  height: 40px;
-  background: honeydew;
-  border: 1px solid grey;
-}
-.healthbar-value {
-  background-color: green;
-  width: 80%;
-  height: 100%;
+.container {
+  widows: 90%;
+  max-width: 40rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 1rem auto;
+  border-radius: 14px;
+  padding: 0.5rem;
+  text-align: center;
 }
 #controlls {
   display: flex;
@@ -179,11 +134,5 @@ button:disabled {
   background: grey;
   transform: none;
   cursor: not-allowed;
-}
-h2 {
-  margin-bottom: 0.25rem;
-}
-img {
-  width: 25%;
 }
 </style>
