@@ -30,6 +30,26 @@ import PlayerCard from './components/PlayerCard.vue'
 
 @Options({
   components: { PlayerCard },
+  watch: {
+    playerHealth(value){
+      if(value === 0) {
+        if(this.monsterHealth === 0){
+          this.winner = 'draw'
+        } else {
+          this.winner = 'monster'
+        }
+      }
+    },
+    monsterHealth(value){
+      if(value === 0){
+        if(this.playerHealth === 0){
+          this.winner = 'draw'
+        } else {
+          this.winner = 'player'
+        }
+      }
+    }
+  }
 })
 export default class App extends Vue {
   private readonly MAX_HEALTH = 100
