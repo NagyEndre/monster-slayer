@@ -16,7 +16,7 @@
       <button @click="attackMonster">ATTACK</button>
       <button @click="specialAttack" :disabled="attackNotAvailable">SPECIAL ATTACK</button>
       <button @click="healPlayer" :disabled="canNotHeal">HEAL</button>
-      <button>SURRENDER</button>
+      <button @click="surrenderPlayer">SURRENDER</button>
     </section>
     <section class="container">
       <h2>Battle log</h2>
@@ -61,7 +61,7 @@ export default class App extends Vue {
   private roundCount = 0
   private isAttackUsed = false
 
-  winner = null
+  winner: string | null = null
 
   get attackNotAvailable() {
     if (this.roundCount % 3 === 0) {
@@ -104,6 +104,10 @@ export default class App extends Vue {
     this.playerHealth = calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
 
     this.attackPlayer()
+  }
+
+  surrenderPlayer(){
+    this.winner = 'monster'
   }
 
   resetGame(){
