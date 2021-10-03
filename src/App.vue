@@ -22,9 +22,20 @@
       <h2>Battle log</h2>
       <ul>
         <li v-for="log in battleLog" :key="log">
-          <span :class="{'log_player': log.actionBy === 'player', 'log_monster': log.actionBy === 'monster'}">{{log.actionBy === 'player' ? 'Player': 'Monster'}}</span>
-          <span v-if="log.actionType === 'heal'"> heals himself by <span class="log_heal">{{log.actionValue}}</span></span>
-          <span v-else-if="log.actionType === 'attack'"> attacks and deals <span class="log_damage">{{log.actionValue}}</span> damage</span>
+          <span
+            :class="{
+              log_player: log.actionBy === 'player',
+              log_monster: log.actionBy === 'monster',
+            }"
+          >
+            {{ log.actionBy === 'player' ? 'Player' : 'Monster' }}
+          </span>
+          <span v-if="log.actionType === 'heal'">
+            heals himself by <span class="log_heal">{{ log.actionValue }}</span>
+          </span>
+          <span v-else-if="log.actionType === 'attack'">
+            attacks and deals <span class="log_damage">{{ log.actionValue }}</span> damage
+          </span>
           <span v-else-if="log.actionType === 'surrender'"> surrenders himself</span>
         </li>
       </ul>
@@ -39,25 +50,25 @@ import PlayerCard from './components/PlayerCard.vue'
 @Options({
   components: { PlayerCard },
   watch: {
-    playerHealth(value){
-      if(value === 0) {
-        if(this.monsterHealth === 0){
+    playerHealth(value) {
+      if (value === 0) {
+        if (this.monsterHealth === 0) {
           this.winner = 'draw'
         } else {
           this.winner = 'monster'
         }
       }
     },
-    monsterHealth(value){
-      if(value === 0){
-        if(this.playerHealth === 0){
+    monsterHealth(value) {
+      if (value === 0) {
+        if (this.playerHealth === 0) {
           this.winner = 'draw'
         } else {
           this.winner = 'player'
         }
       }
-    }
-  }
+    },
+  },
 })
 export default class App extends Vue {
   private readonly MAX_HEALTH = 100
@@ -119,12 +130,12 @@ export default class App extends Vue {
     this.attackPlayer()
   }
 
-  surrenderPlayer(){
+  surrenderPlayer() {
     this.addLogMessage('player', 'surrender')
     this.winner = 'monster'
   }
 
-  resetGame(){
+  resetGame() {
     this.monsterHealth = this.MAX_HEALTH
     this.playerHealth = this.MAX_HEALTH
     this.winner = null
@@ -133,12 +144,11 @@ export default class App extends Vue {
     this.battleLog = []
   }
 
-  addLogMessage(who:string , what: string , value?: number){
+  addLogMessage(who: string, what: string, value?: number) {
     let logEntry: LogEntry = {
       actionBy: who,
       actionType: what,
       actionValue: value,
-
     }
     this.battleLog.unshift(logEntry)
   }
@@ -206,23 +216,23 @@ button:disabled {
   transform: none;
   cursor: not-allowed;
 }
-ul{
+ul {
   list-style: none;
 }
-li{
+li {
   font-size: 1.2rem;
-  margin: 0.5rem
+  margin: 0.5rem;
 }
-.log_monster{
-  color: purple
+.log_monster {
+  color: purple;
 }
 .log_damage {
-  color: red
+  color: red;
 }
-.log_player{
-  color: blue
+.log_player {
+  color: blue;
 }
-.log_heal{
-  color: green
+.log_heal {
+  color: green;
 }
 </style>
