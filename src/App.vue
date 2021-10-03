@@ -12,7 +12,7 @@
       <h3 v-else-if="winner === 'draw'">It's a draw!</h3>
       <button @click="resetGame">Start New Game</button>
     </section>
-    <section id="controlls" class="container">
+    <section v-else id="controlls" class="container">
       <button @click="attackMonster">ATTACK</button>
       <button @click="specialAttack" :disabled="attackNotAvailable">SPECIAL ATTACK</button>
       <button @click="healPlayer" :disabled="canNotHeal">HEAL</button>
