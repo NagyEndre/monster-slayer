@@ -10,6 +10,7 @@
       <h3 v-if="winner === 'player'">You won!</h3>
       <h3 v-else-if="winner === 'monster'">Monster won!</h3>
       <h3 v-else-if="winner === 'draw'">It's a draw!</h3>
+      <button @click="resetGame">Start New Game</button>
     </section>
     <section id="controlls" class="container">
       <button @click="attackMonster">ATTACK</button>
@@ -103,6 +104,14 @@ export default class App extends Vue {
     this.playerHealth = calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
 
     this.attackPlayer()
+  }
+
+  resetGame(){
+    this.monsterHealth = this.MAX_HEALTH
+    this.playerHealth = this.MAX_HEALTH
+    this.winner = null
+    this.roundCount = 0
+    this.isAttackUsed = false
   }
   private getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min
