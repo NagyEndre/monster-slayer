@@ -24,7 +24,8 @@
         <li v-for="log in battleLog" :key="log">
           <span :class="{'log_player': log.actionBy === 'player', 'log_monster': log.actionBy === 'monster'}">{{log.actionBy === 'player' ? 'Player': 'Monster'}}</span>
           <span v-if="log.actionType === 'heal'"> heals himself by <span class="log_heal">{{log.actionValue}}</span></span>
-          <span v-else> attacks and deals <span class="log_damage">{{log.actionValue}}</span> damage</span>
+          <span v-else-if="log.actionType === 'attack'"> attacks and deals <span class="log_damage">{{log.actionValue}}</span> damage</span>
+          <span v-else-if="log.actionType === 'surrender'"> surrenders himself</span>
         </li>
       </ul>
     </section>
@@ -119,6 +120,7 @@ export default class App extends Vue {
   }
 
   surrenderPlayer(){
+    this.addLogMessage('player', 'surrender')
     this.winner = 'monster'
   }
 
@@ -131,7 +133,7 @@ export default class App extends Vue {
     this.battleLog = []
   }
 
-  addLogMessage(who:string , what: string , value: number){
+  addLogMessage(who:string , what: string , value?: number){
     let logEntry: LogEntry = {
       actionBy: who,
       actionType: what,
@@ -147,7 +149,7 @@ export default class App extends Vue {
 interface LogEntry {
   actionBy: string
   actionType: string
-  actionValue: number
+  actionValue?: number
 }
 </script>
 
