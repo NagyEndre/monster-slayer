@@ -20,7 +20,11 @@
     </section>
     <section class="container">
       <h2>Battle log</h2>
-      <ul></ul>
+      <ul>
+        <li v-for="log in battleLog" :key="log">
+          {{ log.actionBy }} - {{log.actionType }} - {{ log.actionValue}}
+          </li>
+      </ul>
     </section>
   </div>
 </template>
@@ -63,6 +67,8 @@ export default class App extends Vue {
 
   winner: string | null = null
 
+  battleLog: LogEntry[] = []
+
   get attackNotAvailable() {
     if (this.roundCount % 3 === 0) {
       this.isAttackUsed = false
@@ -79,6 +85,7 @@ export default class App extends Vue {
     const attackValue = this.getRandomNumber(5, 10)
     const calculatedHealth = (this.monsterHealth -= attackValue)
     this.monsterHealth = calculatedHealth < 0 ? 0 : calculatedHealth
+    this.addLogMessage('player', 'attack', attackValue)
     this.attackPlayer()
   }
 
@@ -86,6 +93,7 @@ export default class App extends Vue {
     const attackValue = this.getRandomNumber(2, 12)
     const calculatedHealth = (this.playerHealth -= attackValue)
     this.playerHealth = calculatedHealth < 0 ? 0 : calculatedHealth
+    this.addLogMessage('monster', 'attack', attackValue)
   }
 
   specialAttack() {
@@ -93,6 +101,7 @@ export default class App extends Vue {
     const attackValue = this.getRandomNumber(10, 20)
     this.monsterHealth -= attackValue
     this.isAttackUsed = true
+    this.addLogMessage('player', 'attack', attackValue)
     this.attackPlayer()
   }
 
@@ -103,6 +112,7 @@ export default class App extends Vue {
 
     this.playerHealth = calculatedHealth > this.MAX_HEALTH ? this.MAX_HEALTH : calculatedHealth
 
+    this.addLogMessage('player', 'heal', healValue)
     this.attackPlayer()
   }
 
@@ -116,10 +126,26 @@ export default class App extends Vue {
     this.winner = null
     this.roundCount = 0
     this.isAttackUsed = false
+    this.battleLog = []
+  }
+
+  addLogMessage(who:string , what: string , value: number){
+    let logEntry: LogEntry = {
+      actionBy: who,
+      actionType: what,
+      actionValue: value,
+
+    }
+    this.battleLog.unshift(logEntry)
   }
   private getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min)) + min
   }
+}
+interface LogEntry {
+  actionBy: string
+  actionType: string
+  actionValue: number
 }
 </script>
 
@@ -175,5 +201,17 @@ button:disabled {
   background: grey;
   transform: none;
   cursor: not-allowed;
+}
+ul{
+  list-style: none;
+}
+.log_monster{
+  color: orange
+}
+.log_damage {
+  color: red
+}
+.log_player{
+  color: purple
 }
 </style>
