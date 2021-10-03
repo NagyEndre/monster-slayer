@@ -22,8 +22,10 @@
       <h2>Battle log</h2>
       <ul>
         <li v-for="log in battleLog" :key="log">
-          {{ log.actionBy }} - {{log.actionType }} - {{ log.actionValue}}
-          </li>
+          <span :class="{'log_player': log.actionBy === 'player', 'log_monster': log.actionBy === 'monster'}">{{log.actionBy === 'player' ? 'Player': 'Monster'}}</span>
+          <span v-if="log.actionType === 'heal'"> heals himself by <span class="log_heal">{{log.actionValue}}</span></span>
+          <span v-else> attacks and deals <span class="log_damage">{{log.actionValue}}</span> damage</span>
+        </li>
       </ul>
     </section>
   </div>
@@ -205,13 +207,20 @@ button:disabled {
 ul{
   list-style: none;
 }
+li{
+  font-size: 1.2rem;
+  margin: 0.5rem
+}
 .log_monster{
-  color: orange
+  color: purple
 }
 .log_damage {
   color: red
 }
 .log_player{
-  color: purple
+  color: blue
+}
+.log_heal{
+  color: green
 }
 </style>
