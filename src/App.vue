@@ -5,6 +5,12 @@
   <div>
     <PlayerCard name="Monster's" :health="monsterHealth" avatarType="2" class="container" />
     <PlayerCard name="Your" :health="playerHealth" avatarType="1" class="container" />
+    <section v-if="winner" class="container">
+      <h2>Game Over!</h2>
+      <h3 v-if="winner === 'player'">You won!</h3>
+      <h3 v-else-if="winner === 'monster'">Monster won!</h3>
+      <h3 v-else-if="winner === 'draw'">It's a draw!</h3>
+    </section>
     <section id="controlls" class="container">
       <button @click="attackMonster">ATTACK</button>
       <button @click="specialAttack" :disabled="attackNotAvailable">SPECIAL ATTACK</button>
@@ -33,6 +39,8 @@ export default class App extends Vue {
 
   private roundCount = 0
   private isAttackUsed = false
+
+  winner = null
 
   get attackNotAvailable() {
     if (this.roundCount % 3 === 0) {
