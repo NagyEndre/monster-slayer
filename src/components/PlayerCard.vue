@@ -1,11 +1,9 @@
 <template>
-  <section>
-    <h2>{{ name }} Health</h2>
-    <img :src="avatarSrc" />
-    <div class="healthbar">
-      <div class="healthbar-value" :style="healthBarStyles"></div>
-    </div>
-  </section>
+  <h2>{{ name }} Health</h2>
+  <img :src="avatarSrc" />
+  <div class="healthbar">
+    <div class="healthbar-value" :style="healthBarStyles"></div>
+  </div>
 </template>
 
 <script lang="ts">
