@@ -12,14 +12,20 @@ import { Options, Vue } from 'vue-class-component'
 @Options({
   props: {
     name: String,
-    health: Number,
-    avatarType: Number,
+    health: {
+      type: Number,
+      default: 100,
+    },
+    avatarType: {
+      type: Number,
+      default: 2,
+    },
   },
 })
 export default class PlayerCard extends Vue {
-  name = 'Player'
-  health = 70
-  avatarType = 2
+  name!: string
+  health!: number
+  avatarType!: number
 
   get avatarSrc() {
     return `https://robohash.org/${Math.random()}.png?set=set${this.avatarType}`
