@@ -3,22 +3,26 @@
     <h1>Monster Slayer</h1>
   </header>
   <div>
-    <PlayerCard name="Monster's" :health="monsterHealth" avatarType="2" class="container" />
-    <PlayerCard name="Your" :health="playerHealth" avatarType="1" class="container" />
-    <section v-if="winner" class="container">
+    <base-card>
+      <PlayerCard name="Monster's" :health="monsterHealth" avatarType="2" />
+    </base-card>
+    <base-card>
+      <PlayerCard name="Your" :health="playerHealth" avatarType="1" />
+    </base-card>
+    <base-card v-if="winner">
       <h2>Game Over!</h2>
       <h3 v-if="winner === 'player'">You won!</h3>
       <h3 v-else-if="winner === 'monster'">Monster won!</h3>
       <h3 v-else-if="winner === 'draw'">It's a draw!</h3>
       <button @click="resetGame">Start New Game</button>
-    </section>
-    <section v-else id="controlls" class="container">
+    </base-card>
+    <base-card v-else id="controlls">
       <button @click="attackMonster">ATTACK</button>
       <button @click="specialAttack" :disabled="attackNotAvailable">SPECIAL ATTACK</button>
       <button @click="healPlayer" :disabled="canNotHeal">HEAL</button>
       <button @click="surrenderPlayer">SURRENDER</button>
-    </section>
-    <section class="container">
+    </base-card>
+    <base-card>
       <h2>Battle log</h2>
       <ul>
         <li v-for="log in battleLog" :key="log">
@@ -39,16 +43,17 @@
           <span v-else-if="log.actionType === 'surrender'"> surrenders himself</span>
         </li>
       </ul>
-    </section>
+    </base-card>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import PlayerCard from './components/PlayerCard.vue'
+import BaseCard from './components/BaseCard.vue'
 
 @Options({
-  components: { PlayerCard },
+  components: { PlayerCard, BaseCard },
   watch: {
     playerHealth(value) {
       if (value === 0) {
@@ -145,7 +150,7 @@ export default class App extends Vue {
   }
 
   addLogMessage(who: string, what: string, value?: number) {
-    let logEntry: LogEntry = {
+    const logEntry: LogEntry = {
       actionBy: who,
       actionType: what,
       actionValue: value,
@@ -196,13 +201,6 @@ button:hover {
   transform: scale(1.1);
 }
 .container {
-  widows: 90%;
-  max-width: 40rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 1rem auto;
-  border-radius: 14px;
-  padding: 0.5rem;
-  text-align: center;
 }
 #controlls {
   display: flex;
