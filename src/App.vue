@@ -4,10 +4,10 @@
   </header>
   <div>
     <base-card>
-      <PlayerCard name="Monster's" :health="monsterHealth" avatarType="2" />
+      <PlayerCard name="Monster's" :health="monsterHealth" :avatarType="2" />
     </base-card>
     <base-card>
-      <PlayerCard name="Your" :health="playerHealth" avatarType="1" />
+      <PlayerCard name="Your" :health="playerHealth" :avatarType="1" />
     </base-card>
     <base-card v-if="winner">
       <h2>Game Over!</h2>
